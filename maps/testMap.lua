@@ -51,7 +51,7 @@ return {
       width = 30,
       height = 30,
       id = 1,
-      name = "Calque de Tuiles 1",
+      name = "ground",
       class = "",
       visible = true,
       opacity = 1,

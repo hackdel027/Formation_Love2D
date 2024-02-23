@@ -7,6 +7,8 @@ function love.load()
     
     local anim8 = require 'lib/anim8'
     local sti = require 'lib/sti'
+    camera = require 'lib/camera'
+    cam = camera()
     gameMap = sti('maps/testMap.lua')
     Player = {}
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -14,7 +16,7 @@ function love.load()
     love.window.setTitle(WIN_TITLE)
     Player.x = WIN_WIDTH / 2
     Player.y = WIN_HEIGHT / 2
-    Player.speed = 50
+    Player.speed = 100
     -- Player.sprite = love.graphics.newImage('sprites/parrot.png')
     Player.sprite = love.graphics.newImage('sprites/player-sheet.png')
     Player.grid = anim8.newGrid(12, 18, Player.sprite:getWidth(), Player.sprite:getHeight())
@@ -29,22 +31,22 @@ end
 
 function love.update(dt)
     local isMoving = false
-    if love.keyboard.isDown('left', 'a') and Player.x > 0 then
+    if love.keyboard.isDown('left', 'a') then
         Player.x = Player.x - (Player.speed * dt)
         Player.anim = Player.animation.left
         isMoving = true
     end 
-    if love.keyboard.isDown('right', 'd') and Player.x + Player.sprite:getWidth()< WIN_WIDTH then
+    if love.keyboard.isDown('right', 'd') then
         Player.x = Player.x + (Player.speed * dt)
         Player.anim = Player.animation.right
         isMoving = true
     end
-    if love.keyboard.isDown('up', 'w') and Player.y > 0 then
+    if love.keyboard.isDown('up', 'w') then
         Player.anim = Player.animation.up
         Player.y = Player.y - (Player.speed * dt)
         isMoving = true
     end
-    if love.keyboard.isDown('down', 's') and Player.y + Player.sprite:getHeight() < WIN_HEIGHT then
+    if love.keyboard.isDown('down', 's') then
         Player.anim = Player.animation.down
         Player.y = Player.y + (Player.speed * dt)
         isMoving = true
@@ -54,12 +56,31 @@ function love.update(dt)
     end
     Player.anim:update(dt)
     Minotaur:update(dt)
+    cam:lookAt(Player.x, Player.y)
+    if cam.x < WIN_WIDTH/2 then
+        cam.x = WIN_WIDTH / 2
+    end
+    if cam.y < WIN_HEIGHT / 2 then
+        cam.y = WIN_HEIGHT / 2
+    end
+    mapw = gameMap.width * gameMap.tilewidth
+    maph = gameMap.height * gameMap.tileheight
+
+    if cam.x > (mapw - WIN_WIDTH / 2) then
+        cam.x = mapw - WIN_WIDTH / 2
+    end
+    if cam.y > (maph - WIN_HEIGHT / 2) then
+        cam.y = maph - WIN_HEIGHT / 2
+    end
 end
 
 function love.draw()
     -- love.graphics.draw(Player.sprite, Player.x, Player.y)
-    gameMap:draw()
-    Player.anim:draw(Player.sprite, Player.x, Player.y, nil, 3)
-    -- Minotaur:draw()
+    cam:attach()
+        gameMap:drawLayer(gameMap.layers['ground'])
+        gameMap:drawLayer(gameMap.layers['trees'])
+        Player.anim:draw(Player.sprite, Player.x, Player.y, nil, 6, nil, 6, 9)
+    cam:detach()
+        -- Minotaur:draw()
 end
 
