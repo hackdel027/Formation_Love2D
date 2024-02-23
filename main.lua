@@ -1,17 +1,20 @@
 require('constants')
+require('players/minotaur')
 local Player
 
 function love.load()
     -- love.graphics.setColor(255, 255, 255)
     
     local anim8 = require 'lib/anim8'
+    local sti = require 'lib/sti'
+    gameMap = sti('maps/testMap.lua')
     Player = {}
     love.graphics.setDefaultFilter('nearest', 'nearest')
-    love.graphics.setBackgroundColor(0, 0.2, 0.3)
+    -- love.graphics.setBackgroundColor(0, 0.2, 0.3)
     love.window.setTitle(WIN_TITLE)
     Player.x = WIN_WIDTH / 2
     Player.y = WIN_HEIGHT / 2
-    Player.speed = 100
+    Player.speed = 50
     -- Player.sprite = love.graphics.newImage('sprites/parrot.png')
     Player.sprite = love.graphics.newImage('sprites/player-sheet.png')
     Player.grid = anim8.newGrid(12, 18, Player.sprite:getWidth(), Player.sprite:getHeight())
@@ -21,6 +24,7 @@ function love.load()
     Player.animation.right = anim8.newAnimation(Player.grid('1-4', 3), 0.2)
     Player.animation.up = anim8.newAnimation(Player.grid('1-4', 4), 0.2)
     Player.anim = Player.animation.right
+    Minotaur:load()
 end
 
 function love.update(dt)
@@ -49,10 +53,13 @@ function love.update(dt)
         Player.anim:gotoFrame(2)
     end
     Player.anim:update(dt)
+    Minotaur:update(dt)
 end
 
 function love.draw()
     -- love.graphics.draw(Player.sprite, Player.x, Player.y)
-    Player.anim:draw(Player.sprite, Player.x, Player.y, nil, 5)
+    gameMap:draw()
+    Player.anim:draw(Player.sprite, Player.x, Player.y, nil, 3)
+    -- Minotaur:draw()
 end
 

@@ -1,0 +1,33 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "fileStates": {
+        "testMap.lua": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 446,
+                "y": 293.33333333333326
+            }
+        },
+        "testMap.lua#test tile": {
+            "scaleInDock": 0.5
+        }
+    },
+    "last.exportedFilePath": "D:/Love2D/Formation1/maps",
+    "last.imagePath": "D:/Love2D/Formation1/maps",
+    "map.height": 30,
+    "map.lastUsedExportFilter": "Tous les Fichiers (*)",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "recentFiles": [
+        "testMap.lua"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}
