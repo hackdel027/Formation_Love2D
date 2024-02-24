@@ -3,7 +3,13 @@
         "height": 4300,
         "width": 2
     },
+    "activeFile": "testMap.tmx",
+    "expandedProjectPaths": [
+    ],
     "fileStates": {
+        "#tile1": {
+            "scaleInDock": 0.75
+        },
         "testMap.lua": {
             "scale": 0.75,
             "selectedLayer": 0,
@@ -14,15 +20,32 @@
         },
         "testMap.lua#test tile": {
             "scaleInDock": 0.5
+        },
+        "testMap.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 716.6666666666666,
+                "y": 951.5151515151515
+            }
+        },
+        "testMap.tmx#tiles set": {
+            "scaleInDock": 1
         }
     },
     "last.exportedFilePath": "D:/Love2D/Formation1/maps",
     "last.imagePath": "D:/Love2D/Formation1/maps",
     "map.height": 30,
     "map.lastUsedExportFilter": "Tous les Fichiers (*)",
+    "map.lastUsedFormat": "tmx",
     "map.tileHeight": 64,
     "map.tileWidth": 64,
+    "openFiles": [
+        "testMap.tmx"
+    ],
+    "project": "testMap.tiled-project",
     "recentFiles": [
+        "testMap.tmx",
         "testMap.lua"
     ],
     "tileset.embedInMap": true,

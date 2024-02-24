@@ -5,6 +5,7 @@ function Minotaur:load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     self.x = 100
     self.y = 100
+    self.speed = 3
     self.spriteSheet = love.graphics.newImage('sprites/minotaur.png')
     self.grid = anim8.newGrid(140, 140, self.spriteSheet:getWidth(), self.spriteSheet:getHeight())
     self.animation = {}
@@ -24,14 +25,22 @@ function Minotaur:update(dt)
     move = false
     if love.keyboard.isDown('down', 's') then
         self.anim = self.animation.down
+        self.y = self.y + self.speed
         move = true
     end
     if love.keyboard.isDown('up', 'w') then
         self.anim = self.animation.up
+        self.y = self.y - self.speed
         move = true
     end
     if love.keyboard.isDown('right', 'd') then
         self.anim = self.animation.right
+        self.x = self.x + self.speed
+        move = true
+    end
+    if love.keyboard.isDown('left', 'a') then
+        -- self.anim = self.animation.right
+        self.x = self.x - self.speed
         move = true
     end
     if move == false then
@@ -46,5 +55,5 @@ function Minotaur:update(dt)
     self.anim:update(dt)
 end
 function Minotaur:draw()
-    self.anim:draw(self.spriteSheet, self.x, self.y)
+    self.anim:draw(self.spriteSheet, self.x, self.y, nil, 1, nil, 70, 70)
 end
